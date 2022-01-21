@@ -5,8 +5,6 @@ import (
 	"database/sql"
 	"encoding/json"
 	"fmt"
-
-	//"io/ioutil"
 	"log"
 	"net/http"
 
@@ -30,7 +28,7 @@ type ListSearchToken struct { // map this type to the record created in the tabl
 	SDD       int    //int 3
 }
 
-var listSearchToken map[string]ListSearchToken
+var token map[string]ListSearchToken
 var db *sql.DB
 
 func validKey(r *http.Request) bool {
@@ -48,13 +46,14 @@ func validKey(r *http.Request) bool {
 
 //-------------------------------- Functions for DB ----------------------------------------
 
-func GetTokens(db *sql.DB, StudentID string) ListSearchToken {
-	query := fmt.Sprintf("Select * FROM ListSearchToken WHERE StudentID = '%s'", StudentID)
+func GetTokens(db *sql.DB) ListSearchToken {
+	query := fmt.Sprintf("Select * FROM ListSearchToken")
 	results, err := db.Query(query)
 	//handle error
 	if err != nil {
 		panic(err.Error)
 	}
+
 	var listSearchToken ListSearchToken
 	for results.Next() {
 		// map this type to the record in the table
@@ -64,6 +63,9 @@ func GetTokens(db *sql.DB, StudentID string) ListSearchToken {
 		if err != nil {
 			panic(err.Error())
 		}
+
+		fmt.Println(listSearchToken.StudentID, listSearchToken.CM, listSearchToken.CSF, listSearchToken.DP, listSearchToken.PRG1, listSearchToken.DB,
+			listSearchToken.ID, listSearchToken.OSNF, listSearchToken.PRG2, listSearchToken.OOAD, listSearchToken.WEB, listSearchToken.PFD, listSearchToken.SDD)
 	}
 	return listSearchToken
 }
@@ -76,23 +78,29 @@ func GetTokeninfo(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	email := r.URL.Query().Get("studentID")
+	params := mux.Vars(r)
+	fmt.Fprintf(w, "Wallet balance for "+params["StudentID"])
+	kv := r.URL.Query()
 
-	var listSearchToken ListSearchToken
-	var errMsg string
+	for k, v := range kv {
+		fmt.Println(k, v)
+	}
+	json.NewEncoder(w).Encode(token)
 
-	listSearchToken, errMsg = Login(db, email)
-	if errMsg == "StudentID does not exist" {
-		w.WriteHeader(http.StatusNotFound)
-		w.Write([]byte("404 - No Student with that ID found"))
-	} else {
-		json.NewEncoder(w).Encode(listSearchToken)
+	if r.Method == "GET" {
+		if _, ok := token[params["StudentID"]]; ok {
+			json.NewEncoder(w).Encode(
+				token[params["StudentID"]])
+		} else {
+			w.WriteHeader(http.StatusNotFound)
+			w.Write([]byte("404 - No Student with that ID found"))
+		}
 	}
 }
 
 func main() {
 
-	listSearchTokens = map[string]ListSearchToken{}
+	token = map[string]ListSearchToken{}
 
 	//Database code
 	_db, err := sql.Open("mysql", "user:password@tcp(127.0.0.1:3306)/MarksWalletDB") //Connecting to the db
@@ -107,7 +115,7 @@ func main() {
 
 	router := mux.NewRouter()
 
-	router.HandleFunc("/drivers", GetTokeninfo).Methods("GET")
+	router.HandleFunc("/api/v1/ListToken", GetTokeninfo).Methods("GET")
 
 	fmt.Println("Driver microservice API operating on port 5000")
 	log.Fatal(http.ListenAndServe(":5000", router))
