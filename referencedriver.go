@@ -84,18 +84,6 @@ func UpdateDriver(db *sql.DB, DriverID int, d Driver) {
 	}
 }
 
-func DeleteDriver(db *sql.DB, DriverID int) string { //not to be implemented into the FE
-	query := fmt.Sprintf("DELETE FROM Driver WHERE ID='%d'", DriverID)
-
-	_, err := db.Query(query)
-	var errMsg string
-
-	if err != nil {
-		errMsg = "Account does not exist"
-	}
-	return errMsg
-}
-
 func Login(db *sql.DB, email string) (Driver, string) {
 	query := fmt.Sprintf("SELECT * FROM Driver where Email = '%s'", email)
 
