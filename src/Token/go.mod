@@ -1,4 +1,4 @@
-module MarksWallet.com/api/v1/ListToken
+module MarksWallet.com/api/v1/Token
 
 go 1.17
 
