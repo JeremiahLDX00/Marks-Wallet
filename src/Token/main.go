@@ -21,6 +21,7 @@ type TokenType struct { // map this type to the record created in the table
 type Transactions struct {
 	TransactionID   int    //int 3
 	StudentID       string //varchar 9
+	ToStudentID     string //varchar 9
 	TokenTypeID     int    //int 5
 	TransactionType string //varchar 30
 	Amount          int    //int 3,
