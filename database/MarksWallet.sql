@@ -1,16 +1,8 @@
-#1. Create database for marks wallet
 CREATE database MarksWalletdb;
 USE MarksWalletdb;
 
-#2. Create and grant permission to user
-CREATE USER 'user'@'%' IDENTIFIED BY 'password';
-
-GRANT ALL PRIVILEGES
-ON MarksWalletdb.*
-TO 'user'@'%';
-
-#DROP TABLE Transactions;
-#DROP TABLE TokenType;
+DROP TABLE Transactions;
+DROP TABLE TokenType;
 
 CREATE TABLE TokenType(
 TokenTypeID int(5) auto_increment PRIMARY KEY,
