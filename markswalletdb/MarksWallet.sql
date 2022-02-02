@@ -1,8 +1,8 @@
 CREATE database MarksWalletdb;
 USE MarksWalletdb;
 
-DROP TABLE Transactions;
-DROP TABLE TokenType;
+#DROP TABLE Transactions;
+#DROP TABLE TokenType;
 
 CREATE TABLE TokenType(
 TokenTypeID int(5) auto_increment PRIMARY KEY,
