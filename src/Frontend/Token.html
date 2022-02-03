@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Marks Wallet Package</title>
+<link rel="stylesheet" href="stylesheet.css">
+<h1 align="center">Marks Wallet Package</h1>
+<p align= "center">Get all available tokens for student using student ID<br><br></p>
+</head>
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- javascript to handle the API  -->
+    <script type="text/javascript">
+        function Token(method, type, form) {
+            event.preventDefault();
+            const DataForm = new FormData(form);
+            var object;
+            var url;
+            if (type == "GET") {
+                var studentid
+                for(let [name, value] of DataForm){
+                    if (name == "StudentID") { 
+                        studentid = value
+                    }
+                }
+                console.log(studentid)
+                url = "http://localhost:9071/api/v1/Token/student/"+studentid
+                console.log(url)
+            }
+            $.ajax({
+                type: type,
+                url: url,
+                dataType: "json",
+                data: object,
+                contentType: "application/json",
+                success: function (data, textStatus, jqXHR){
+                    var table = $("<table><tr><th>"+method+"</th></tr>");
+                    if (type == "GET") {
+                        table.append("<tr><td>StudentID:</td><td>" + data.StudentID + "</td></tr>");
+                        table.append("<tr><td>Token Name:</td><td>" + data["TokenTypeName"] + "</td></tr>");
+                        table.append("<tr><td>Amount:</td><td>" + data["Amount"] + "</td></tr>");
+                    }
+                    $("#message").html(table);
+                }
+            });
+        };
+    </script>
+    
+    <!-- The container that stores the GET form-->
+    <div class="container" id="GET">
+        <h3>Get all tokens for student</h3>
+        <form onsubmit="Token('GetStudentTokens', 'GET', this);">
+            <div>
+                <label for="StudentID">Student ID:</label>
+                <input type="text" class="form-control" name="StudentID" id="StudentID" placeholder="Enter your student id" value="">
+            </div>
+        <br>
+        <br>
+        <button type="submit" class="submitbutton">Submit</button>
+    </div>
+    <div class="btncontainer">
+        <a href="MarksWallet.html" target=""><button type="button" class="backbtn">Back to Home</button></a>
+    </div>
+        </form>
+    <footer>S10198398 | Jeremiah</footer>
+</body>
+</html>

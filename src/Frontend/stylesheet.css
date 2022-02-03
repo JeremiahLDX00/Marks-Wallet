@@ -1,0 +1,52 @@
+h1,h3 {
+    color: rgb(0, 0, 0);
+    font-family:monospace;
+}
+
+body {
+    background-color: lightskyblue;
+}
+
+.marksbutton {
+    background-color: #a532c2;
+    border: solid black;
+    color: white;
+    padding: 14px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    width: 250px;
+    height: 100px;
+    cursor: pointer;
+  }
+
+.container,.btncontainer {
+    text-align: center;
+}
+
+
+.backbtn {
+    background-color: #a532c2;
+    border: solid black;
+    color: white;
+    padding: 14px 40px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.submitbutton {
+    background-color: #3fd199;
+    border: solid black;
+    color: white;
+    padding: 14px 40px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
