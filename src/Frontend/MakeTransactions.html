@@ -7,14 +7,94 @@
 <p align= "center">Get all available tokens for student using student ID<br><br></caption>
 </head>
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
-    
-  
-    <div class="backbutton">
-        <a href="MarksWallet.html" target=""><button type="button" class="backbtn">Back to Home</button></a>
-    </div>
-
-    <footer>S10198398 | Jeremiah</footer>
-</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- javascript to handle the API  -->
+    <script type="text/javascript">
+        function MakeTransaction(method, type, form) {
+            event.preventDefault();
+            const DataForm = new FormData(form);
+            var object;
+            var url;
+            if (type == "POST"){
+                var studentid
+                for(let [name, value] of DataForm){
+                    if (name == "StudentID") { 
+                        studentid = value
+                    }
+                }
+                var object = {
+                    "TransactionID": parseInt(DataForm.get("TransactionID")),
+                    "StudentID": DataForm.get("StudentID"),
+                    "ToStudentID": DataForm.get("ToStudentID"),
+                    "TokenTypeID": parseInt(DataForm.get("TokenTypeID")),
+                    "TransactionType": DataForm.get("TransactionType"),
+                    "Amount": parseInt(DataForm.get("Amount"))
+                };
+                object = JSON.stringify(object);
+                console.log(studentid)
+                url = "http://localhost:9072/api/v1/Transactions/maketransaction/"+studentid
+                console.log(url)
+            }
+            $.ajax({
+                type: type,
+                url: url,
+                dataType: "json",
+                data: object,
+                contentType: "application/json",
+                error: function (jqXHR, textStatus, data) {
+                    $("#message").empty();
+                    if (type == "POST"){
+                        var table = $("<table><tr><th>"+jqXHR.responseText+"</th></tr>");
+                        $("#message").html(table);
+                    } else {
+                        alert("Result:" + textStatus + " " + error + " " + jqXHR.textStatus + " " + jqXHR.statusText + " " + jqXHR.responseText);
+                    }
+                    $("#message").show()
+                }
+            });
+        };
+    </script>
+        <!--StudentID, ToStudentID, TokenTypeID, TransactionType, Amount-->
+        <!-- The container that stores the POST form-->
+            <div class="container" id="POST">
+                <h1>Make a transaction</h1>
+                <form onsubmit="MakeTransaction('SendReceiveToken', 'POST', this);">
+                    <div>
+                        <label for="StudentID">Student ID:</label>
+                        <input type="text" class="form-control" name="StudentID" id="StudentID" placeholder="Enter your StudentID" value="">
+                    </div>
+                    <br>
+                    <div>
+                        <label for="ToStudentID">To student ID:</label>
+                        <input type="text" class="form-control" name="ToStudentID" id="ToStudentID" placeholder="ID of the person you're sending to">
+                    </div>
+                    <br>
+                    <div>
+                        <label for="TokenTypeID">Token ID:</label>
+                        <input type="text" class="form-control" name="TokenTypeID" id="TokenTypeID" placeholder="Enter the token ID of desired token">
+                    </div>
+                    <br>
+                    <div>
+                        <label for="TransactionType">Transaction Description:</label>
+                        <input type="text" class="form-control" name="TransactionType" id="TransactionType" placeholder="Enter the type of transaction this is">
+                    </div>
+                    <br>
+                    <div>
+                        <label for="Amount">Amount:</label>
+                        <input type="text" class="form-control" name="Amount" id="Amount" placeholder="Enter the amount you are sending">
+                    </div>
+                    </br>
+                    <br>
+                <button type="submit" class="submitbutton">Submit</button>
+                <div class="btncontainer">
+                    <a href="MarksWallet.html" target=""><button type="button" class="backbtn">Back to Home</button></a>
+                </div>
+                    </form>
+            </div>
+            <br>
+            <!-- Store the success/fail message in to show after user has clicked submitted -->
+            <div id="message"></div>
+            <footer>S10198398 | Jeremiah</footer>
+    </body>
 </html>
