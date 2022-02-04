@@ -33,13 +33,18 @@
                 data: object,
                 contentType: "application/json",
                 success: function (data, textStatus, jqXHR){
+                    console.log(data)
                     var table = $("<table><tr><th>"+method+"</th></tr>");
                     if (type == "GET") {
-                        table.append("<tr><td>Transaction ID:</td><td>" + data["TransactionID"] + "</td></tr>");
-                        table.append("<tr><td>Student ID:</td><td>" + data.StudentID + "</td></tr>");
-                        table.append("<tr><td>Token Name:</td><td>" + data["TokenTypeName"] + "</td></tr>");
-                        table.append("<tr><td>Transaction Type:</td><td>" + data["TransactionType"] + "</td></tr>");
-                        table.append("<tr><td>Amount:</td><td>" + data["Amount"] + "</td></tr>");
+                        for(var i = 0; i < data.length; i++) {
+                        table += "<tr><td>Transaction ID:</td><td>" + data[i]["TransactionID"] + "</td></tr>";
+                        table += "<td>Student ID:</td><td>" + data[i]["StudentID"] + "</td>";
+                        table += "<td>To Student:</td><td>" + data[i]["ToStudentID"] + "</td>";
+                        table += "<td>Token Name:</td><td>" + data[i]["TokenTypeName"] + "</td>";
+                        table += "<td>Transaction Type:</td><td>" + data[i]["TransactionType"] + "</td>";
+                        table += "<tr><td>Amount:</td><td>" + data[i]["Amount"] + "</td></tr>";
+                    }
+                        
                     }
                     $("#message").html(table);
                 }

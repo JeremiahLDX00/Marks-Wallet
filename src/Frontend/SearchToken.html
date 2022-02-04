@@ -35,7 +35,7 @@
                 success: function (data, textStatus, jqXHR){
                     var table = $("<table><tr><th>"+method+"</th></tr>");
                     if (type == "GET") {
-                        table.append("<tr><td>Token ID:</td><td>" + data["TokenID"] + "</td></tr>");
+                        table.append("<tr><td>Token ID:</td><td>" + data["TokenTypeID"] + "</td></tr>");
                         table.append("<tr><td>Token Name:</td><td>" + data.TokenTypeName + "</td></tr>");
                     }
                     $("#message").html(table);
@@ -49,7 +49,7 @@
         <h3>Search for available tokens</h3>
         <form onsubmit="Token('SearchTokens', 'GET', this);">
             <div>
-                <label for="StudentID">Student ID:</label>
+                <label for="StudentID">Token Name:</label>
                 <input type="text" class="form-control" name="TokenTypeName" id="TokenTypeName" placeholder="Enter a token name" value="">
             </div>
         <br>

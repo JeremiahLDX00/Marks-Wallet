@@ -10,6 +10,7 @@ import (
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -41,7 +42,7 @@ var db *sql.DB
 //----------------------------- Function for GET All transactions ----------------------------
 
 func GetTransactions(db *sql.DB, StudentID string) []ListTransactions {
-	query := `SELECT TransactionID, StudentID, TokenType.TokenTypeName, TransactionType, Amount 
+	query := `SELECT TransactionID, StudentID, ToStudentID, TokenType.TokenTypeName, TransactionType, Amount 
 	FROM Transactions
 	INNER JOIN TokenType
 	ON Transactions.TokenTypeID = TokenType.TokenTypeID
@@ -57,7 +58,7 @@ func GetTransactions(db *sql.DB, StudentID string) []ListTransactions {
 	for results.Next() {
 		var allTransaction ListTransactions
 		//map this type to the record in the table
-		err = results.Scan(&allTransaction.TransactionID, &allTransaction.StudentID,
+		err = results.Scan(&allTransaction.TransactionID, &allTransaction.StudentID, &allTransaction.ToStudentID,
 			&allTransaction.TokenTypeName, &allTransaction.TransactionType, &allTransaction.Amount)
 		if err != nil {
 			panic(err.Error())
@@ -137,7 +138,7 @@ func MakeTransaction(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	//Database code
-	_db, err := sql.Open("mysql", "user:password@tcp(MarksWalletDatabase:3306)/MarksWalletdb") //Connecting to the db
+	_db, err := sql.Open("mysql", "user:password@tcp(127.0.0.1:3306)/MarksWalletdb") //Connecting to the db
 	// handle error
 	if err != nil {
 		panic(err.Error())
@@ -148,10 +149,12 @@ func main() {
 	defer db.Close()
 
 	router := mux.NewRouter()
-
+	headers := handlers.AllowedHeaders([]string{"X-REQUESTED-With", "Content-Type"})
+	methods := handlers.AllowedMethods([]string{"GET", "PUT", "POST", "DELETE"})
+	origins := handlers.AllowedOrigins([]string{"*"})
 	router.HandleFunc("/api/v1/Transactions/viewall/{studentid}", GetAllTransactions).Methods("GET")
 	router.HandleFunc("/api/v1/Transactions/maketransaction/{studentid}", MakeTransaction).Methods("POST")
 
 	fmt.Println("Driver microservice API operating on port 9072")
-	log.Fatal(http.ListenAndServe(":9072", router))
+	log.Fatal(http.ListenAndServe(":9072", handlers.CORS(headers, methods, origins)(router)))
 }

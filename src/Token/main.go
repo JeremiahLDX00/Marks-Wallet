@@ -10,6 +10,7 @@ import (
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
@@ -129,7 +130,7 @@ func SearchForTokens(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	//Database code
-	_db, err := sql.Open("mysql", "user:password@tcp(MarksWalletDatabase:3306)/MarksWalletdb") //Connecting to the db
+	_db, err := sql.Open("mysql", "user:password@tcp(127.0.0.1:3306)/MarksWalletdb") //Connecting to the db
 	// handle error
 	if err != nil {
 		panic(err.Error())
@@ -140,10 +141,12 @@ func main() {
 	defer db.Close()
 
 	router := mux.NewRouter()
-
+	headers := handlers.AllowedHeaders([]string{"X-REQUESTED-With", "Content-Type"})
+	methods := handlers.AllowedMethods([]string{"GET", "PUT", "POST", "DELETE"})
+	origins := handlers.AllowedOrigins([]string{"*"})
 	router.HandleFunc("/api/v1/Token/student/{studentid}", GetAvailableTokens).Methods("GET")
 	router.HandleFunc("/api/v1/Token/search/{tokentypename}", SearchForTokens).Methods("GET")
 
 	fmt.Println("Driver microservice API operating on port 9071")
-	log.Fatal(http.ListenAndServe(":9071", router))
+	log.Fatal(http.ListenAndServe(":9071", handlers.CORS(headers, methods, origins)(router)))
 }
