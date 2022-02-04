@@ -130,7 +130,7 @@ func SearchForTokens(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	//Database code
-	_db, err := sql.Open("mysql", "user:password@tcp(127.0.0.1:3306)/MarksWalletdb") //Connecting to the db
+	_db, err := sql.Open("mysql", "user:password@tcp(MarksWalletDatabase:3306)/MarksWalletdb") //Connecting to the db
 	// handle error
 	if err != nil {
 		panic(err.Error())
