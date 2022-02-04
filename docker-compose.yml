@@ -46,3 +46,38 @@ services:
         condition: on-failure
     depends_on:
       - MarksWalletdb
+  markswalletweb:
+    container_name: markswalletfrontend
+    build: 
+      context: ./Frontend
+    restart: always
+    ports:
+      - "9070:9070"
+  gettokenweb:
+    container_name: gettokenfrontend
+    build: 
+      context: ./Frontend
+    restart: always
+    ports:
+      - "9070:9070"
+  searchtokenweb:
+    container_name: searchtokenfrontend
+    build: 
+      context: ./Frontend
+    restart: always
+    ports:
+      - "9070:9070"
+  viewtransactionsweb:
+    container_name: viewtransactionsfrontend
+    build: 
+      context: ./Frontend
+    restart: always
+    ports:
+      - "9070:9070"
+  maketransactionsweb:
+    container_name: maketransactionsfrontend
+    build: 
+      context: ./Frontend
+    restart: always
+    ports:
+      - "9070:9070"
