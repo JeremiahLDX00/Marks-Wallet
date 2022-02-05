@@ -1,6 +1,6 @@
 # Documentation for Marks Wallet Package
 
-**_Things done during the checkpoint_**
+## **_Things done during the checkpoint_**
 
 <details><summary>Click here</summary>
 <p>
@@ -23,7 +23,7 @@
 </p>
 </details>
 
-**_Things done after checkpoint_**
+## **_Things done after checkpoint_**
 
 <details><summary>Click here</summary>
 <p>
@@ -50,7 +50,7 @@
 </p>
 </details>
 
-**Final Documentation**
+## **Final Documentation**
 
 <details><summary>Click here</summary>
 <p>
