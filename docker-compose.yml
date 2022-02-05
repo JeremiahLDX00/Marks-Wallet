@@ -9,7 +9,7 @@ services:
     networks:
      - assignment2
     ports:
-      - 9073:8080
+      - "9073:9073"
     environment:
       MYSQL_ROOT_PASSWORD: password
     volumes:
@@ -18,7 +18,7 @@ services:
     image: mysql:latest
     restart: always
     build:
-      context: .
+      context: ./src/Transactions
     container_name: transactioncontainer
     hostname: transactioncontainer
     networks:
@@ -34,7 +34,7 @@ services:
     image: mysql:latest
     restart: always
     build:
-      context: .
+      context: ./src/Tokens
     container_name: tokenscontainer
     hostname: tokenscontainer
     networks:
@@ -47,35 +47,8 @@ services:
     depends_on:
       - MarksWalletdb
   markswalletweb:
-    container_name: markswalletfrontend
-    build: 
-      context: ./src/Frontend
-    restart: always
-    ports:
-      - "9070:9070"
-  gettokenweb:
-    container_name: gettokenfrontend
-    build: 
-      context: ./src/Frontend
-    restart: always
-    ports:
-      - "9070:9070"
-  searchtokenweb:
-    container_name: searchtokenfrontend
-    build: 
-      context: ./src/Frontend
-    restart: always
-    ports:
-      - "9070:9070"
-  viewtransactionsweb:
-    container_name: viewtransactionsfrontend
-    build: 
-      context: ./src/Frontend
-    restart: always
-    ports:
-      - "9070:9070"
-  maketransactionsweb:
-    container_name: maketransactionsfrontend
+    container_name: frontend
+    hostname: frontend
     build: 
       context: ./src/Frontend
     restart: always
