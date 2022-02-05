@@ -47,6 +47,7 @@ func GetStudentTokens(db *sql.DB, StudentID string) []TokenTypeBalance {
 	results, err := db.Query(query, StudentID)
 	//handle error
 	if err != nil {
+		fmt.Println(err.Error())
 		panic(err.Error)
 	}
 
@@ -130,7 +131,7 @@ func SearchForTokens(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	//Database code
-	_db, err := sql.Open("mysql", "user:password@tcp(markswalletdb:9073)/markswalletdb") //Connecting to the db
+	_db, err := sql.Open("mysql", "root:password@tcp(markswalletdb:3306)/markswalletdb") //Connecting to the db
 	// handle error
 	if err != nil {
 		panic(err.Error())

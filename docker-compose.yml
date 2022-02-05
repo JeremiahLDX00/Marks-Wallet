@@ -4,7 +4,8 @@ services:
   markswalletdb:
     container_name: markswalletdb
     hostname: markswalletdb
-    image: mysql:latest
+    build:
+      context: ./src/markswalletdb
     restart: always
     networks:
      - assignment2
@@ -12,8 +13,6 @@ services:
       - "9073:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
-    volumes:
-      - ./data:/docker-entrypoint-initdb.d
   transactions:
     restart: always
     build:

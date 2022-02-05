@@ -1,5 +1,5 @@
-CREATE database MarksWalletdb;
-USE MarksWalletdb;
+CREATE database markswalletdb;
+USE markswalletdb;
 
 #DROP TABLE Transactions;
 #DROP TABLE TokenType;

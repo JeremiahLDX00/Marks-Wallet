@@ -138,7 +138,7 @@ func MakeTransaction(w http.ResponseWriter, r *http.Request) {
 func main() {
 
 	//Database code
-	_db, err := sql.Open("mysql", "user:password@tcp(markswalletdb:9073)/markswalletdb") //Connecting to the db
+	_db, err := sql.Open("mysql", "root:password@tcp(markswalletdb:3306)/markswalletdb") //Connecting to the db
 	// handle error
 	if err != nil {
 		panic(err.Error())
