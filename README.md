@@ -49,3 +49,22 @@
   </ul>
 </p>
 </details>
+
+**Final Documentation**
+
+<details><summary>Click here</summary>
+<p>
+
+#### Microservice Design
+  
+![image](https://user-images.githubusercontent.com/93190183/152654905-d8ace92b-870b-4b44-9644-ce42c66db057.png)
+  
+  <p> I have created this microservice using two APIs, one database and one frontend.</p>
+  
+![image](https://user-images.githubusercontent.com/93190183/152654863-dd92e036-59cf-44d4-8a12-7a3fc45ab692.png)
+
+    
+
+
+</p>
+</details>
