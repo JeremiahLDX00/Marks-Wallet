@@ -1,17 +1,17 @@
-version: '3.3'
+version: '3.8'
 
 services:
   MarksWalletdb:
-    image: mysql:latest
-    restart: always
     container_name: MarksWalletDatabase
     hostname: MarksWalletDatabase
+    image: mysql:latest
+    restart: always
     networks:
-     - MarksWalletNet
+     - assignment2
     ports:
-      - 8080:8080
+      - 9073:8080
     environment:
-      - MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
     volumes:
       - ./data:/docker-entrypoint-initdb.d
   Transactions:
@@ -22,7 +22,7 @@ services:
     container_name: transactioncontainer
     hostname: transactioncontainer
     networks:
-      - transactionNet
+      - assignment2
     ports:
       - 9072:9072
     deploy:
@@ -38,7 +38,7 @@ services:
     container_name: tokenscontainer
     hostname: tokenscontainer
     networks:
-      - tokensNet
+      - assignment2
     ports:
       - 9071:9071
     deploy:
@@ -81,3 +81,7 @@ services:
     restart: always
     ports:
       - "9070:9070"
+
+networks:
+  assignment2:
+    driver: bridge
