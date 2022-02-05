@@ -9,7 +9,7 @@ services:
     networks:
      - assignment2
     ports:
-      - "9073:9073"
+      - "9073:3306"
     environment:
       MYSQL_ROOT_PASSWORD: password
     volumes:
@@ -51,7 +51,7 @@ services:
       context: ./src/Frontend
     restart: always
     ports:
-      - "9070:9070"
+      - "9070:80"
 
 networks:
   assignment2:
