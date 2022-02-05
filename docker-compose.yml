@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  MarksWalletdb:
-    container_name: MarksWalletDatabase
-    hostname: MarksWalletDatabase
+  markswalletdb:
+    container_name: markswalletdb
+    hostname: markswalletdb
     image: mysql:latest
     restart: always
     networks:
@@ -14,8 +14,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
     volumes:
       - ./data:/docker-entrypoint-initdb.d
-  Transactions:
-    image: mysql:latest
+  transactions:
     restart: always
     build:
       context: ./src/Transactions
@@ -29,12 +28,11 @@ services:
       restart_policy:
         condition: on-failure
     depends_on:
-      - MarksWalletdb
-  Tokens:
-    image: mysql:latest
+      - markswalletdb
+  tokens:
     restart: always
     build:
-      context: ./src/Tokens
+      context: ./src/Token
     container_name: tokenscontainer
     hostname: tokenscontainer
     networks:
@@ -45,8 +43,8 @@ services:
       restart_policy:
         condition: on-failure
     depends_on:
-      - MarksWalletdb
-  markswalletweb:
+      - markswalletdb
+  frontend:
     container_name: frontend
     hostname: frontend
     build: 
