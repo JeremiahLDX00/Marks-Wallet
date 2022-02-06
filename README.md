@@ -79,6 +79,9 @@ I have created this microservice using two APIs, one database and one frontend. 
 <b>Database Design</b>
 <p>The Database has been designed in such a way that currently it has not been split for the various API's. The justification for this is such that other microservices will be able to easily access the same database to retrieve the data for the neccessary functions, all they need to do is to call the seperate API's respectively and they will be able to achieve getting the result from the various tables that have been made in the database.</p> 
 
+<b>Docker</b>
+<p>For this, docker has also been used to containerize the various functions. In this case, 4 containers have been created. 1 container for the frontend, 2 for the API's and 1 for the database. Once they have been containerized they can then be pushed into the server by cloning the repository and then composing up inside of the server to run the various microservices themselves.</p> 
+
 ![image](https://user-images.githubusercontent.com/93190183/152654863-dd92e036-59cf-44d4-8a12-7a3fc45ab692.png)
 
 <p> This is the layout of the entire file. they have been categorized into the various folders and their various functions respectively, this is to achieve the goal of being loosely coupled to the best of my ability. This is so that they wouldn't be too dependent on each other later on and the services will then be able to operate on it's own.</p>
