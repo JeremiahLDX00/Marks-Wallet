@@ -106,10 +106,12 @@ I have created this microservice using two APIs, one database and one frontend. 
 
 <details><summary>Click here</summary>
 <p>
-  1. Clone the repository using the URL that is in this website
-  2. Run the docker-compose file and build using compose up
-  3. check that the container and images have been created in your docker desktop
-  4. Access the frontend container located in the container and run it via the browser
-  5. You can now test the full package and see how it runs!
+  <ol>
+   <li>Clone the repository using the URL that is in this website</li>
+   <li>Run the docker-compose file and build using compose up</li>
+   <li>check that the container and images have been created in your docker desktop</li>
+   <li>Access the frontend container located in the container and run it via the browser</li>
+   <li>You can now test the full package and see how it runs!</li>
+  </ol>
 </p>
 </details>
