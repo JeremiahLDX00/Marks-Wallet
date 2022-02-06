@@ -95,7 +95,7 @@ I have created this microservice using two APIs, one database and one frontend. 
 
 <details><summary>Click here</summary>
 <p>
-  Frontend: https://hub.docker.com/r/jeremiahldx21/markswallet_frontend/tags<br>
+  Frontend: https://hub.docker.com/r/jeremiahldx21/markswallet_markswalletfrontend/tags<br>
   Database: https://hub.docker.com/r/jeremiahldx21/markswallet_markswalletdb/tags<br>
   Token API: https://hub.docker.com/r/jeremiahldx21/markswallet_tokens/tags<br>
   Transaction API: https://hub.docker.com/r/jeremiahldx21/markswallet_transactions/tags
