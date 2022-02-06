@@ -36,6 +36,7 @@
     <li>Create API documentation for body request and URLs</li>
     <li>Create Microservice Diagram</li>
     <li>Update readme for github</li>
+    <li>Post Docker Links</li>
   </ul>
     
 #### After checkpoint delivered
@@ -46,6 +47,7 @@
     <li>Create API documentation for body request and URLs</li>
     <li>Create Microservice Diagram</li>
     <li>Update readme for github</li>
+    <li>Post Docker Links</li>
   </ul>
 </p>
 </details>
