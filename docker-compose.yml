@@ -4,8 +4,7 @@ services:
   markswalletdb:
     container_name: markswalletdb
     hostname: markswalletdb
-    build:
-      context: ./src/markswalletdb
+    image: jeremiahldx21/markswallet_markswalletdb
     restart: always
     networks:
      - assignment2
@@ -15,8 +14,7 @@ services:
       MYSQL_ROOT_PASSWORD: password
   transactions:
     restart: always
-    build:
-      context: ./src/Transactions
+    image: jeremiahldx21/markswallet_transactions
     container_name: transactioncontainer
     hostname: transactioncontainer
     networks:
@@ -30,8 +28,7 @@ services:
       - markswalletdb
   tokens:
     restart: always
-    build:
-      context: ./src/Token
+    image: jeremiahldx21/markswallet_tokens
     container_name: tokenscontainer
     hostname: tokenscontainer
     networks:
@@ -46,8 +43,7 @@ services:
   frontend:
     container_name: frontend
     hostname: frontend
-    build: 
-      context: ./src/Frontend
+    image: jeremiahldx21/markswallet_frontend
     restart: always
     ports:
       - "9070:80"
