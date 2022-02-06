@@ -40,9 +40,9 @@ services:
         condition: on-failure
     depends_on:
       - markswalletdb
-  frontend:
-    container_name: frontend
-    hostname: frontend
+  markswalletfrontend:
+    container_name: markswalletfrontend
+    hostname: markswalletfrontend
     image: jeremiahldx21/markswallet_frontend
     restart: always
     ports:
