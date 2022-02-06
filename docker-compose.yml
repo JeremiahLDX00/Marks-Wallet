@@ -43,7 +43,7 @@ services:
   markswalletfrontend:
     container_name: markswalletfrontend
     hostname: markswalletfrontend
-    image: jeremiahldx21/markswallet_frontend
+    image: jeremiahldx21/markswallet_markswalletfrontend
     restart: always
     ports:
       - "9070:80"
