@@ -101,3 +101,15 @@ I have created this microservice using two APIs, one database and one frontend. 
   Transaction API: https://hub.docker.com/r/jeremiahldx21/markswallet_transactions/tags
 </p>
 </details>
+
+## **Steps to Set up using GitHub**
+
+<details><summary>Click here</summary>
+<p>
+  1. Clone the repository using the URL that is in this website
+  2. Run the docker-compose file and build using compose up
+  3. check that the container and images have been created in your docker desktop
+  4. Access the frontend container located in the container and run it via the browser
+  5. You can now test the full package and see how it runs!
+</p>
+</details>
